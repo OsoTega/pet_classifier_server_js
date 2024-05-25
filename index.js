@@ -14,13 +14,14 @@ import path, { dirname } from "path";
 import cors from 'cors'
 import bodyParser from 'body-parser';
 import fs from 'fs'
+import { configDotenv } from 'dotenv';
 
 const app = express()
+configDotenv();
 
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
-
 
 //Post method to receive image array from the frontend
 
@@ -39,7 +40,7 @@ app.post('/classify', async (req, res) => {
 
 
     //Sending the data to the python flask server for prediction
-    fetch('https://localhost:5000/api/classify', {
+    fetch(process.env.SERVER_URL, {
         method: 'POST',
         body: JSON.stringify({ data: arrayTensor }),
         headers: {
