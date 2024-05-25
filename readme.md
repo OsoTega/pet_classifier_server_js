@@ -1,7 +1,3 @@
-Here's a README template for your server code:
-
----
-
 # Image Processing Server
 
 This server processes image data received from the frontend and sends it to a Python server for classification.
@@ -63,7 +59,3 @@ Example usage:
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"data": [0.1, 0.2, ..., 0.9]}' http://localhost:8080/classify
 ```
-
----
-
-Feel free to customize the README further with additional information or instructions specific to your project!
