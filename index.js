@@ -27,6 +27,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
 app.post('/classify', async (req, res) => {
 
+    console.log("Received request");
+
     const data = req.body.data;
 
     const floatData = new Float32Array(data);
@@ -38,7 +40,7 @@ app.post('/classify', async (req, res) => {
     const imageTensor = tf.tensor4d(floatData, [1, 224, 224, 3]);
     const arrayTensor = imageTensor.arraySync();
 
-
+    console.log("Sending request");
     //Sending the data to the python flask server for prediction
     fetch(process.env.SERVER_URL, {
         method: 'POST',
@@ -48,6 +50,7 @@ app.post('/classify', async (req, res) => {
         },
         mode: 'cors'
     }).then(async (response) => {
+        console.log("Received response");
         const data = await response.json()
         const label = data.message[0][0];
 
